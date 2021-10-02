@@ -1,7 +1,7 @@
 /* global Handlebars, utils, dataSource */ // eslint-disable-line no-unused-vars
 
 {
-  'use strict';
+  ('use strict');
 
   const select = {
     templateOf: {
@@ -45,21 +45,86 @@
       defaultValue: 1,
       defaultMin: 1,
       defaultMax: 9,
-    }
+    },
   };
 
   const templates = {
-    menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
+    menuProduct: Handlebars.compile(
+      document.querySelector(select.templateOf.menuProduct).innerHTML
+    ),
   };
+  class Product {
+    constructor(id, data) {
+      const thisProduct = this;
+      thisProduct.id = id;
+      thisProduct.data = data;
+      thisProduct.renderInMenu();
+      console.log('new product: ', thisProduct);
+      thisProduct.initAccordion();
+    }
+    renderInMenu() {
+      const thisProduct = this;
+      // generate HTML based on template
+      const generatedHTML = templates.menuProduct(thisProduct.data);
+      // create element using utils.createElementFromHTML
+      thisProduct.element = utils.createDOMFromHTML(generatedHTML);
+      // find menu Container
+      const menuContainer = document.querySelector(select.containerOf.menu);
+      // add element to menu
+      menuContainer.appendChild(thisProduct.element);
+    }
+
+    initAccordion() {
+      const thisProduct = this;
+      /* find the clickable trigger (the element that should react to clicking) */
+      const clickableTrigger = thisProduct.element.querySelector(
+        select.menuProduct.clickable
+      );
+
+      /* START: add event listener to clickable trigger on event click */
+      clickableTrigger.addEventListener('click', function (event) {
+        /* prevent default action for event */
+        event.preventDefault();
+        /* find active product (product that has active class) */
+        // console.log(clickableTrigger);
+
+        const activeArticle = document.querySelector(
+          select.all.menuProductsActive
+        );
+
+        /* if there is active product and it's not thisProduct.element, remove class active from it */
+        if (activeArticle !== null && activeArticle != thisProduct.element) {
+          activeArticle.classList.remove('active');
+        }
+        /* toggle active class on thisProduct.element */
+        thisProduct.element.classList.toggle('active');
+      });
+    }
+  }
 
   const app = {
-    init: function(){
+    initMenu: function () {
+      const thisApp = this;
+
+      console.log('thisApp.data: ', thisApp.data);
+      for (let productData in thisApp.data.products) {
+        new Product(productData, thisApp.data.products[productData]);
+      }
+    },
+    initData: function () {
+      const thisApp = this;
+      thisApp.data = dataSource;
+    },
+
+    init: function () {
       const thisApp = this;
       console.log('*** App starting ***');
       console.log('thisApp:', thisApp);
       console.log('classNames:', classNames);
       console.log('settings:', settings);
       console.log('templates:', templates);
+      thisApp.initData();
+      thisApp.initMenu();
     },
   };
 
