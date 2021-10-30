@@ -1,4 +1,7 @@
-*, *::before, *::after {
+/* eslint-disable */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
