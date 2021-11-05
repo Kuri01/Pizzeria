@@ -9,3 +9,126 @@
 
 @import 'partials/product';
 @import 'partials/booking';
+
+@import 'partials/home';
+
+// .photo-1 {
+//   background-image: url('../images/home/pizza-1.jpg');
+//   background-size: cover;
+// }
+
+// .photo-2 {
+//   background-image: url('../images/home/pizza-2.jpg');
+//   height: fit-content;
+//   background-size: cover;
+// }
+
+// .cell {
+//   position: relative;
+// }
+
+.card {
+  border-radius: 2%;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  transition: 500ms ease;
+}
+
+.card p {
+  justify-content: center;
+  opacity: 0;
+  transition: 250ms ease;
+  font-size: 20px;
+  color: white;
+}
+
+.card h5 {
+  justify-content: center;
+  transition: 500ms ease;
+  font-size: 35px;
+  color: white;
+}
+
+.card:hover {
+  h5 {
+    position: relative;
+    top: -10px;
+  }
+
+  p {
+    opacity: 100;
+  }
+
+  a {
+    opacity: 100;
+  }
+
+  img {
+    opacity: 80%;
+  }
+}
+
+.banner-background {
+  background-color: rgb(202, 83, 83);
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.card h6 {
+  justify-content: center;
+  transition: 500ms ease;
+  font-size: 35px;
+  color: white;
+}
+
+.card span {
+  justify-content: center;
+  transition: 250ms ease;
+  font-size: 20px;
+  color: white;
+}
+
+.col-image img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.fa-heart {
+  color: white;
+  transition: 250ms ease;
+  font-size: 30px;
+}
+
+.fa-share-alt {
+  color: white;
+  transition: 250ms ease;
+  font-size: 30px;
+}
+
+.fa-heart:hover {
+  color: red;
+}
+
+.fa-share-alt:hover {
+  color: royalblue;
+}
+
+.card a {
+  z-index: 1;
+  opacity: 0;
+  transition: 500ms ease;
+}
+
+.card img::after {
+  color: black;
+  background-color: black;
+}

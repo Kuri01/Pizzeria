@@ -73,14 +73,10 @@ class Cart {
     thisCart.subtotalPrice = 0;
     thisCart.totalPrice = 0;
 
-    console.log(thisCart.products);
-
     for (let product of thisCart.products) {
       thisCart.totalNumber += product.amount;
       thisCart.subtotalPrice += product.price * product.amount;
     }
-
-    console.log(this.subtotalPrice);
 
     if (thisCart.subtotalPrice != 0) {
       thisCart.totalPrice = thisCart.subtotalPrice + thisCart.deliveryFee;
@@ -90,10 +86,6 @@ class Cart {
     thisCart.dom.subtotalPrice.innerHTML = thisCart.subtotalPrice;
     thisCart.dom.totalPrice.innerHTML = thisCart.totalPrice;
     thisCart.dom.totalNumber.innerHTML = thisCart.totalNumber;
-
-    console.log('TOTAL PRICE: ', thisCart.totalPrice);
-    console.log('SUBTOTAL PRICE: ', thisCart.subtotalPrice);
-    console.log('TOTAL NUMBER: ', thisCart.totalNumber);
   }
 
   remove(cartProduct) {
@@ -116,7 +108,7 @@ class Cart {
 
     this.getClientInfo();
 
-    const url = settings.db.url + '/' + settings.db.orders;
+    const url = settings.db.url + '/' + settings.db.order;
 
     const payload = {
       adress: thisCart.dom.address,
@@ -127,6 +119,8 @@ class Cart {
       deliveryFee: thisCart.deliveryFee,
       products: [],
     };
+
+    console.log(payload);
 
     for (let prod of thisCart.products) {
       payload.products.push(prod.getData());
@@ -141,7 +135,6 @@ class Cart {
     };
 
     fetch(url, options);
-    console.log('FETCH: ', payload);
   }
 }
 

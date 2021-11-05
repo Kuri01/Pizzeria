@@ -64,9 +64,18 @@ export const select = {
     peopleAmount: '.people-amount',
     hoursAmount: '.hours-amount',
     tables: '.floor-plan .table',
+    orderConf: '.order-confirmation',
+    input: 'input',
   },
   nav: {
     links: '.main-nav a',
+  },
+  home: {
+    button: {
+      order: '.order_button',
+      book: '.booking_button',
+    },
+    value: 'value',
   },
 };
 
@@ -82,7 +91,12 @@ export const classNames = {
 
   booking: {
     loading: 'loading',
-    tableBooked: 'booked',
+    table: {
+      picked: 'pickedTable',
+      booked: 'booked',
+      table: 'table',
+    },
+    floor: '.floor-plan',
   },
   nav: {
     active: 'active',
@@ -114,9 +128,12 @@ export const settings = {
   },
   // CODE ADDED END
   db: {
-    url: '//localhost:3131',
+    url:
+      '//' +
+      window.location.hostname +
+      (window.location.hostname == 'localhost' ? ':3131' : ''),
     products: 'products',
-    order: 'order',
+    order: 'orders',
     booking: 'booking',
     event: 'event',
     dateStartParamKey: 'date_gte',

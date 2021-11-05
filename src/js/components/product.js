@@ -101,7 +101,6 @@ class Product {
 
     // covert form to object structure e.g. { sauce: ['tomato'], toppings: ['olives', 'redPeppers']}
     const formData = utils.serializeFormToObject(thisProduct.form);
-    console.log('formData', formData);
 
     // set price to default price
     let price = thisProduct.data.price;
@@ -136,7 +135,6 @@ class Product {
         }
       }
     }
-    console.log(price);
     // update calculated price in the HTML
     thisProduct.priceSingle = price;
     price *= thisProduct.amountWidget.value;

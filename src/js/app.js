@@ -3,9 +3,10 @@ import { settings, select, classNames, templates } from './settings.js';
 import Product from './components/product.js';
 import Cart from './components/cart.js';
 import { Booking } from './components/booking.js';
+import { home } from './components/home.js';
 // import { active } from 'browser-sync';
 
-const app = {
+export const app = {
   initPages: function () {
     const thisApp = this;
 
@@ -72,18 +73,6 @@ const app = {
     });
   },
 
-  initMenu: function () {
-    const thisApp = this;
-
-    console.log('thisApp.data: ', thisApp.data);
-    for (let productData in thisApp.data.products) {
-      new Product(
-        thisApp.data.products[productData].id,
-        thisApp.data.products[productData]
-      );
-    }
-  },
-
   initData: function () {
     const thisApp = this;
     thisApp.data = {};
@@ -93,33 +82,37 @@ const app = {
         return rawResponse.json();
       })
       .then(function (parsedResponse) {
-        console.log(parsedResponse);
-
         // save parsedResponse as thisApp.data.products
         thisApp.data.products = parsedResponse;
         // execute initMenu method
         thisApp.initMenu();
       });
-    console.log('thisApp.data: ', JSON.stringify(thisApp.data));
   },
+
+  initMenu: function () {
+    const thisApp = this;
+
+    for (let productData in thisApp.data.products) {
+      new Product(
+        thisApp.data.products[productData].id,
+        thisApp.data.products[productData]
+      );
+    }
+  },
+
   initBooking: function () {
     const thisApp = this;
-    console.log('wykonano!');
     const bookingWrapper = document.querySelector(select.containerOf.booking);
     new Booking(bookingWrapper);
   },
 
   init: function () {
     const thisApp = this;
-    console.log('*** App starting ***');
-    console.log('thisApp:', thisApp);
-    console.log('classNames:', classNames);
-    console.log('settings:', settings);
-    console.log('templates:', templates);
     thisApp.initData();
     thisApp.initCart();
     thisApp.initPages();
     thisApp.initBooking();
+    home.init();
   },
 };
 

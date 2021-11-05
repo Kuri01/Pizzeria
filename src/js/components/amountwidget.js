@@ -5,8 +5,6 @@ class AmountWidget extends BaseWidget {
   constructor(element) {
     super(element, settings.amountWidget.defaultValue);
     const thisWidget = this;
-    console.log('AmountWidget: ', thisWidget);
-    console.log('constructor args: ', element);
     thisWidget.getElements(element);
     thisWidget.initActions();
   }
@@ -56,7 +54,6 @@ class AmountWidget extends BaseWidget {
     thisWidget.dom.linkIncrease.addEventListener('click', function (event) {
       event.preventDefault();
       console.log('clicked add');
-      console.log('VALUE OF THIS WIDGET: ', thisWidget.dom.input.value);
       thisWidget.setValue(parseInt(thisWidget.dom.input.value) + 1);
     });
   }
